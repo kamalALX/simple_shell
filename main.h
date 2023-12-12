@@ -25,5 +25,8 @@ int exit_comand(char **input_tokens);
 int print_env(const char *string);
 void print_env2(char **env);
 char **_strtok(char *input);
+int _strcmp(char *s1, char *s2);
+int _atoi(char *s);
+char *_strcat(char *dest, char *src);
 
 #endif /*SIMPLE_SHELL*/

@@ -38,7 +38,7 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 			if (print_env(input_tokens[0]))
 				print_env2(env);
 
-			else if (strcmp(input_tokens[0], "exit"))
+			else if (_strcmp(input_tokens[0], "exit"))
 			{
 				if (!isFullPath(input_tokens[0]))
 				{
@@ -114,8 +114,8 @@ int exit_comand(char **input_tokens)
 					return (1);
 				else if (i == 2)
 				{
-					arg = atoi(input_tokens[1]);
-					if (arg < 0)
+					arg = _atoi(input_tokens[1]);
+					if (arg <= 0)
 					{
 						write(2, "./hsh", 5);
 						write(2, ": 1: exit: Illegal number: ", 27);
@@ -207,13 +207,13 @@ void execfullpath(char *path, char *input_tokens[], char *shell_name)
 {
 	pid_t pid;
 	char *token;
-	char full_path[MAX_PATH_LENGTH];
+	char *full_path;
 	int found = 0;
-
+	
 	token = strtok(path, ":");
 	while (token != NULL)
 	{
-		snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", token, input_tokens[0]);/* make this manualy */
+		full_path = _strcat(_strcat(token, "/"), input_tokens[0]);
 		if (full_path == NULL)
 		{
 			found = 1;
