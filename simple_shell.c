@@ -59,7 +59,7 @@ void print_env2(char **env)
 
 	while (env[i] != NULL)
 	{
-		write(1, env[i], strlen(env[i]));
+		write(1, env[i], _strlen(env[i]));
 		write(1, "\n", 1);
 		i++;
 	}
@@ -119,7 +119,7 @@ int exit_comand(char **input_tokens)
 					{
 						write(2, "./hsh", 5);
 						write(2, ": 1: exit: Illegal number: ", 27);
-						write(2, input_tokens[1], strlen(input_tokens[1]));
+						write(2, input_tokens[1], _strlen(input_tokens[1]));
 						write(2, "\n", 1);
 						status = 2;
 					}
@@ -185,7 +185,7 @@ char *stenvp(char *envp[])
 			if (ar[j] == '\0')
 			{
 				j = 0;
-				path = malloc(strlen(envp[i]) - d + 1);
+				path = malloc(_strlen(envp[i]) - d + 1);
 				if (path == NULL)
 					exit(EXIT_FAILURE);
 				while (envp[i][d] != '\0')
@@ -238,9 +238,9 @@ void execfullpath(char *path, char *input_tokens[], char *shell_name)
 	}
 	if (!found)
 	{
-		write(2, shell_name, strlen(shell_name));
+		write(2, shell_name, _strlen(shell_name));
 		write(2, ": 1: ", 5);
-		write(2, input_tokens[0], strlen(input_tokens[0]));
+		write(2, input_tokens[0],_ strlen(input_tokens[0]));
 		write(2, ": not found\n", 12);
 		status = 127;
 	}
