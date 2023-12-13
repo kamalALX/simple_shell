@@ -2,6 +2,7 @@
 
 int status = 0;
 char *string;
+char *input = NULL;
 
 int main(int argc __attribute__((unused)), char *argv[], char **env)
 {
@@ -10,7 +11,6 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 	char *path = NULL;
 	char *tokenize;
 	char *shell_name;
-	char *input = NULL;
 	size_t size = 0;
 
 	while (1)
@@ -152,16 +152,18 @@ int exit_comand(char **input_tokens, char *shell_name)
 				else if (i == 2)
 				{
 					arg = _atoi(input_tokens[1]);
-					if (arg <= 0)
+					if (arg == -1)
 					{
 						write(2, shell_name, _strlen(shell_name));
 						write(2, ": 1: exit: Illegal number: ", 27);
 						write(2, input_tokens[1], _strlen(input_tokens[1]));
 						write(2, "\n", 1);
 						status = 2;
+						break;
 					}
 					else
 					{
+						free(input);
 						exit(arg);
 					}
 				}
