@@ -169,7 +169,8 @@ int exit_comand(char **input_tokens, char *shell_name)
 				}
 				else
 				{
-					write(2, "exit doesn't take more than one argument\n", 44);
+					write(2, shell_name, _strlen(shell_name));
+					write(2, ": exit doesn't take more than one argument\n", 43);
 					break;
 				}
 			}
