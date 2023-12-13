@@ -3,6 +3,7 @@
 int status = 0;
 char *string;
 
+int _getline(char **input);
 int main(int argc __attribute__((unused)), char *argv[], char **env)
 {
 	int token_count;
@@ -11,15 +12,15 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 	char *tokenize;
 	char *shell_name;
 	char *input = NULL;
-	size_t size = 0;
 
 	while (1)
 	{
 		write(STDOUT_FILENO, "", 0);
 
 		shell_name = argv[0];
-		if (getline(&input, &size, stdin) == -1)
+		if (_getline(&input) == -1)
 		{
+			free(string);
 			free(input);
 			exit(status);
 		}
