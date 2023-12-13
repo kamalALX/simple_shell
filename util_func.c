@@ -5,7 +5,7 @@
  * @s1: input
  * @s2: input
  * Return: return the comparison
-*/
+ */
 
 int _strcmp(char *s1, char *s2)
 {
@@ -25,7 +25,7 @@ int _strcmp(char *s1, char *s2)
  * _atoi -  a function that convert a string to an integer.
  * @s: input
  * Return: 0 success
-*/
+ */
 
 int _atoi(char *s)
 {
@@ -45,23 +45,40 @@ int _atoi(char *s)
 	}
 	return (sum * sign);
 }
+
+/**
+ *  _strcpy - copies a string to another buffer
+ *  @source: source to copy from
+ *  *@dest: destination to copy to
+ *
+ * Return: void
+*/
+
+void _strcpy(char *source, char *dest)
+{
+	int i = 0;
+
+	for (; source[i] != '\0'; i++)
+		dest[i] = source[i];
+	dest[i] = '\0';
+}
+
 /**
  * *_strcat - append two strings.
  * @dest: input.
  * @src: inout.
  * Return: a pointer to the resulting string dest.
-*/
+ */
 
 char *_strcat(char *dest, char *src)
 {
-	char *result = malloc(sizeof(char) * (strlen(dest) + strlen(src) + 1));
+	char *result = NULL;
 
-	if (result == NULL) {
-		return NULL;
-	}
+	result = malloc(sizeof(*result) * (strlen(dest) + strlen(src) + 1));
 
-	strcpy(result, dest);
-	strcpy(result + strlen(dest), src);
+	_strcpy(dest, result);
+	_strcpy(src, result + strlen(dest));
+	result[strlen(dest) + strlen(src)] = '\0';
 
 	return (result);
 }

@@ -1,6 +1,7 @@
 #include "main.h"
 
 int status = 0;
+char *string;
 
 int main(int argc __attribute__((unused)), char *argv[], char **env)
 {
@@ -10,13 +11,14 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 	char *tokenize;
 	char *shell_name;
 	char *input = NULL;
+	size_t size = 0;
 
 	while (1)
 	{
-		write(1, "", 0);
-		shell_name = argv[0];
+		write(STDOUT_FILENO, "", 0);
 
-		if (_getline(&input) == -1)
+		shell_name = argv[0];
+		if (getline(&input, &size, stdin) == -1)
 		{
 			free(input);
 			exit(status);
@@ -26,8 +28,9 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 		tokenize = strtok(input, " \n;");
 		while (tokenize != NULL && token_count < MAX_TOKENS - 1)
 		{
-			input_tokens[token_count++] = tokenize;
+			input_tokens[token_count] = tokenize;
 			tokenize = strtok(NULL, " \n;");
+			token_count++;
 		}
 		input_tokens[token_count] = NULL;
 
@@ -44,15 +47,49 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 				{
 					path = stenvp(env);
 					execfullpath(path, input_tokens, shell_name);
+						free(path);
 				}
 				else
+				{
 					one_word_command(input_tokens, shell_name);
+				}
 			}
 		}
 	}
-	cleanup(input, path);
+	free(string);
+	free(input);
 	return (status);
 }
+
+int _getline(char **input)
+{
+	ssize_t r;
+	int i;
+
+	string = malloc(10000000);
+	if (string == NULL)
+		return (-1);
+
+	i = 0;
+	while (1)
+	{
+		r = read(0, (string + i), 1);
+		if (r == 0)
+			return (-1);
+		else
+		{
+			if (*(string + i) == '\n' || *(string + i) == ';')
+			{
+				*(string + i + 1) = '\0';
+				break;
+			}
+		}
+		i++;
+	}
+	*input = string;
+	return (0);
+}
+
 void print_env2(char **env)
 {
 	int i = 0;
@@ -159,13 +196,6 @@ int isFullPath(const char *string)
 	}
 	return (0);
 }
-
-void cleanup(char *input, char *path)
-{
-	free(input);
-	free(path);
-}
-
 char *stenvp(char *envp[])
 {
 	char *path;
@@ -209,11 +239,13 @@ void execfullpath(char *path, char *input_tokens[], char *shell_name)
 	char *token;
 	char *full_path;
 	int found = 0;
+	char *half_path;
 	
 	token = strtok(path, ":");
 	while (token != NULL)
 	{
-		full_path = _strcat(_strcat(token, "/"), input_tokens[0]);
+		half_path = _strcat(token, "/");
+		full_path = _strcat(half_path, input_tokens[0]);
 		if (full_path == NULL)
 		{
 			found = 1;
@@ -221,6 +253,7 @@ void execfullpath(char *path, char *input_tokens[], char *shell_name)
 		}
 		if (access(full_path, X_OK) == 0)
 		{
+			free(half_path);
 			pid = fork();
 			if (pid == 0)
 			{
@@ -229,11 +262,14 @@ void execfullpath(char *path, char *input_tokens[], char *shell_name)
 			else
 			{
 				waitpid(pid, &status, 0);
+				free(full_path);
 				status >>= 8;
 				found = 1;
 				break;
 			}
 		}
+		free(half_path);
+		free(full_path);
 		token = strtok(NULL, ":");
 	}
 	if (!found)
@@ -256,9 +292,11 @@ void one_word_command(char *input_tokens[], char *shell_name)
 		pid = fork();
 		if (pid == 0)
 		{
-			execve(input_tokens[0], input_tokens, NULL);
-			perror("Exec failed");
-			exit(2);
+			if (execve(input_tokens[0], input_tokens, NULL) == -1)
+			{
+				perror(_custom_getenv("PWD"));
+				exit(2);
+			}
 		}
 		else
 		{
@@ -268,7 +306,10 @@ void one_word_command(char *input_tokens[], char *shell_name)
 	}
 	else
 	{
-		perror(shell_name);
+		write(2, shell_name, _strlen(shell_name));
+		write(2, ": 1: ", 5);
+		write(2, input_tokens[0], _strlen(input_tokens[0]));
+		write(2, ": not found\n", 12);
 		status = 127;
 	}
 }

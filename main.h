@@ -11,13 +11,13 @@
 
 extern int status;
 extern char *line;
+extern char *result;
+extern char **environ;
 
 #define MAX_TOKENS 50
 #define MAX_PATH_LENGTH 256
 
-int _getline(char **input);
 int isFullPath(const char *string);
-void cleanup(char *input, char *path);
 void execfullpath(char *path, char *input_tokens[], char *shell_name);
 char *stenvp(char *envp[]);
 void one_word_command(char *input_tokens[], char *shell_name);
@@ -29,4 +29,6 @@ int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
 char *_strcat(char *dest, char *src);
 int _strlen(char *s);
+char *_custom_getenv(const char *target_name);
+
 #endif /*SIMPLE_SHELL*/
