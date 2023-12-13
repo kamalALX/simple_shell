@@ -1,13 +1,11 @@
 #include "main.h"
 
 /**
- *  * _strcmp -  a function that compares two strings.
- *   *
- *    * @s1: input
- *     * @s2: input
- *      *
- *       * Return: return the comparison
- *       */
+ * _strcmp -  a function that compares two strings.
+ * @s1: input
+ * @s2: input
+ * Return: return the comparison
+*/
 
 int _strcmp(char *s1, char *s2)
 {
@@ -23,15 +21,11 @@ int _strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-#include<stdio.h>
-
 /**
- *  * _atoi -  a function that convert a string to an integer.
- *   *
- *    * @s: input
- *     *
- *      * Return: 0 success
- *      */
+ * _atoi -  a function that convert a string to an integer.
+ * @s: input
+ * Return: 0 success
+*/
 
 int _atoi(char *s)
 {
@@ -51,17 +45,12 @@ int _atoi(char *s)
 	}
 	return (sum * sign);
 }
-
-#include "main.h"
-
 /**
- *  * *_strcat - append two strings.
- *   *
- *    * @dest: input.
- *     * @src: inout.
- *      *
- *       * Return: a pointer to the resulting string dest.
- *       */
+ * *_strcat - append two strings.
+ * @dest: input.
+ * @src: inout.
+ * Return: a pointer to the resulting string dest.
+*/
 
 char *_strcat(char *dest, char *src)
 {
@@ -75,4 +64,19 @@ char *_strcat(char *dest, char *src)
 	strcpy(result + strlen(dest), src);
 
 	return (result);
+}
+/**
+ * _strlen - entry point
+ * @s : integer value
+ * Description: Write a function that returns the length of a string.
+ * Return: return n
+ */
+int _strlen(char *s)
+{
+	int c;
+
+	for (c = 0; s[c] != '\0'; c++)
+	{
+	}
+	return (c);
 }
