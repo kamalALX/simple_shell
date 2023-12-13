@@ -127,7 +127,7 @@ int print_env(const char *string)
 	return (0);
 }
 
-int exit_comand(char **input_tokens)
+int exit_comand(char **input_tokens, char *shell_name)
 {
 	const char ar[] = "exit";
 	int i = 0, j = 0, arg;
@@ -154,7 +154,7 @@ int exit_comand(char **input_tokens)
 					arg = _atoi(input_tokens[1]);
 					if (arg <= 0)
 					{
-						write(2, "./hsh", 5);
+						write(2, shell_name, _strlen(shell_name));
 						write(2, ": 1: exit: Illegal number: ", 27);
 						write(2, input_tokens[1], _strlen(input_tokens[1]));
 						write(2, "\n", 1);
