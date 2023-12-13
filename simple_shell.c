@@ -240,7 +240,7 @@ void execfullpath(char *path, char *input_tokens[], char *shell_name)
 	{
 		write(2, shell_name, _strlen(shell_name));
 		write(2, ": 1: ", 5);
-		write(2, input_tokens[0],_ strlen(input_tokens[0]));
+		write(2, input_tokens[0], _strlen(input_tokens[0]));
 		write(2, ": not found\n", 12);
 		status = 127;
 	}

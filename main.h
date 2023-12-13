@@ -1,4 +1,4 @@
-/ifndef SIMPLE_SHELL
+#ifndef SIMPLE_SHELL
 #define SIMPLE_SHELL
 
 #include <stdio.h>
@@ -28,5 +28,5 @@ char **_strtok(char *input);
 int _strcmp(char *s1, char *s2);
 int _atoi(char *s);
 char *_strcat(char *dest, char *src);
-int _strlen(char *s)
+int _strlen(char *s);
 #endif /*SIMPLE_SHELL*/
