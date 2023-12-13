@@ -36,7 +36,7 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 
 		if (token_count > 0)
 		{
-			if (exit_comand(input_tokens))
+			if (exit_comand(input_tokens, shell_name))
 				break;
 			if (print_env(input_tokens[0]))
 				print_env2(env);

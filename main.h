@@ -21,7 +21,7 @@ int isFullPath(const char *string);
 void execfullpath(char *path, char *input_tokens[], char *shell_name);
 char *stenvp(char *envp[]);
 void one_word_command(char *input_tokens[], char *shell_name);
-int exit_comand(char **input_tokens);
+int exit_comand(char **input_tokens, char *shell_name);
 int print_env(const char *string);
 void print_env2(char **env);
 char **_strtok(char *input);
