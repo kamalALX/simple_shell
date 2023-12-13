@@ -152,7 +152,7 @@ int exit_comand(char **input_tokens, char *shell_name)
 				else if (i == 2)
 				{
 					arg = _atoi(input_tokens[1]);
-					if (arg == -1)
+					if (arg < 0)
 					{
 						write(2, shell_name, _strlen(shell_name));
 						write(2, ": 1: exit: Illegal number: ", 27);
@@ -170,6 +170,7 @@ int exit_comand(char **input_tokens, char *shell_name)
 				else
 				{
 					write(2, "$: exit doesn't take more than one argument\n", 44);
+					break;
 				}
 			}
 		}
