@@ -74,11 +74,11 @@ char *_strcat(char *dest, char *src)
 {
 	char *result = NULL;
 
-	result = malloc(sizeof(*result) * (strlen(dest) + strlen(src) + 1));
+	result = malloc(sizeof(*result) * (_strlen(dest) + _strlen(src) + 1));
 
 	_strcpy(dest, result);
-	_strcpy(src, result + strlen(dest));
-	result[strlen(dest) + strlen(src)] = '\0';
+	_strcpy(src, result + _strlen(dest));
+	result[_strlen(dest) + _strlen(src)] = '\0';
 
 	return (result);
 }

@@ -1,4 +1,4 @@
-	0x16. C - Simple Shell
+					0x16. C - Simple Shell
 
 					     Description
 
@@ -15,11 +15,11 @@ The primary objective is to replicate the functionalities of the basic shell (sh
 
    Feautres of the shell include:
 
-	 - Displaying a prompt and awaiting user input for command execution. Command lines are terminated with a new line.
+	- Displaying a prompt and awaiting user input for command execution. Command lines are				terminatedwith a new line.
 
-	 - Providing error messages and prompting again if an executable cannot be found.
+	- Providing error messages and prompting again if an executable cannot be found.
 
-	 -        Robust error handling.
+	- Robust error handling.
 
 	- Handling the "end of file" condition (Ctrl+D).
 
@@ -27,8 +27,7 @@ The primary objective is to replicate the functionalities of the basic shell (sh
 
 	- Handling the PATH environment variable.
            
-	- Supporting the exit command and capturing exit statuses.                       
-                                                                                                                        
+	- Supporting the exit command and capturing exit statuses.                                                                                                              
 	- Preventing the termination of the shell upon pressing Ctrl-C.
 
 	- Handling the command separator (;).
