@@ -19,7 +19,7 @@ Through "The Gates of Shell," students gain practical experience in coding with 
 
 	- Providing error messages and prompting again if an executable cannot be found.
 
-	- R obust error handling.
+	- Robust error handling.
 
 	- Handling the "end of file" condition (Ctrl+D).
 
