@@ -11,23 +11,27 @@
  * @env: The environment variables.
  * Return: The exit status of the shell program.
 */
+
 int main(int argc __attribute__((unused)), char *argv[], char **env)
 {
 	int token_count;
 	char *input_tokens[MAX_TOKENS];
 	char *path = NULL;
-	char *tokenize, *shell_name;
+	char *tokenize;
+	char *shell_name;
 	size_t size = 0;
 
 	while (1)
 	{
 		write(STDOUT_FILENO, "", 0);
+
 		shell_name = argv[0];
 		if (getline(&input, &size, stdin) == -1)
 		{
 			free(input);
 			exit(status);
 		}
+
 		token_count = 0;
 		tokenize = strtok(input, " \n;");
 		while (tokenize != NULL && token_count < MAX_TOKENS - 1)
@@ -37,22 +41,26 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 			token_count++;
 		}
 		input_tokens[token_count] = NULL;
+
 		if (token_count > 0)
 		{
 			if (exit_comand(input_tokens, shell_name))
 				break;
 			if (print_env(input_tokens[0]))
 				print_env2(env);
+
 			else if (_strcmp(input_tokens[0], "exit"))
 			{
 				if (!isFullPath(input_tokens[0]))
 				{
 					path = stenvp(env);
 					execfullpath(path, input_tokens, shell_name);
-						free(path);
+					free(path);
 				}
 				else
+				{
 					one_word_command(input_tokens, shell_name);
+				}
 			}
 		}
 	}
@@ -60,6 +68,7 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 	free(input);
 	return (status);
 }
+
 /**
  * _getline - Reads a line from standard input and stores it in a dynamically
  * @input: A pointer to a char pointer where the input line will be stored.
