@@ -152,7 +152,7 @@ int exit_comand(char **input_tokens, char *shell_name)
 				else if (i == 2)
 				{
 					arg = _atoi(input_tokens[1]);
-					if (arg < 0)
+					if (arg <= 0)
 					{
 						write(2, "./hsh: 1: exit: Illegal number: ", 27);
 						write(2, input_tokens[1], _strlen(input_tokens[1]));
