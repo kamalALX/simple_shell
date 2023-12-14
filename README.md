@@ -39,6 +39,6 @@ Through "The Gates of Shell," students gain practical experience in coding with 
 
 	- Handling comments denoted by #.
 
-	- Supporting a history feature to recall previous commands.
+	- Supporting a history feature to recall previous commands.              
 
 	- Facilitating file input for enhanced flexibility and functionality.
