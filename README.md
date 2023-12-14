@@ -32,13 +32,13 @@ Through "The Gates of Shell," students gain practical experience in coding with 
 	- Preventing the termination of the shell upon pressing Ctrl-C.
 
 	- Handling the command separator (;).
-
+  
 	- Managing logical operators such as && and ||.
-
+                                                                                                    
 	- Incorporating variable replacements using $? and $$.
-
+                                                                                     
 	- Handling comments denoted by #.
-
+                                                                     
 	- Supporting a history feature to recall previous commands.              
 
 	- Facilitating file input for enhanced flexibility and functionality.
