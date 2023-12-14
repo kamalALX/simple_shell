@@ -5,7 +5,7 @@
 
 This C code project, titled "The Gates of Shell," is a significant Milestone Project in the ALX Africa Software Engineering curriculum. It forms part of the first trimester, providing students with an in-depth exploration of advanced shell programming concepts. These include processes, system calls, bit manipulation, file management, and error handling.
 
-The primary objective is to replicate the functionalities of the basic shell (sh) in a simplified UNIX command interpreter. The entire project is written in C, aiming to enhance students' understanding of key elements such as process management, system calls, bitwise operations, file handling, and effective error handling.
+The  objective is to replicate the functionalities of the basic shell (sh) in a simplified UNIX command interpreter. The entire project is written in C, aiming to enhance students' understanding of key elements such as process management, system calls, bitwise operations, file handling, and effective error handling.
 
 Through "The Gates of Shell," students gain practical experience in coding with C and develop a solid foundation in shell programming. The project serves as a gateway for participants to grasp the essential components of shell programs and comprehend the underlying mechanisms of UNIX-like operating systems.
 
