@@ -13,7 +13,7 @@ Through "The Gates of Shell," students gain practical experience in coding with 
 		Our shell was developed and tested in the Ubuntu 14.04 LTS environment.
 
 
-   Featres of the shell include:
+   Feautres of the shell include:
 
 	 - Displaying a prompt and awaiting user input for command execution. Command lines are terminated with a new line.
 
