@@ -19,7 +19,7 @@ The primary objective is to replicate the functionalities of the basic shell (sh
 
 	 - Providing error messages and prompting again if an executable cannot be found.
 
-	 -                      Robust error handling.
+	 -     Robust error handling.
 
 	- Handling the "end of file" condition (Ctrl+D).
 
