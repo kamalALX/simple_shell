@@ -15,7 +15,7 @@ The primary objective is to replicate the functionalities of the basic shell (sh
 
    Feautres of the shell include:
 
-	 - Displaying a prompt and awaiting user input for command execution. Command lines are terminated with a new line.
+	 -       Displaying a prompt and awaiting user input for command execution. Command lines are terminated with a new line.
 
 	 - Providing error messages and prompting again if an executable cannot be found.
 
