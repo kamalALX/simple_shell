@@ -20,11 +20,11 @@ int _getline(char **input)
 		r = read(0, (string + i), 1);
 		if (r == 0)
 			return (-1);
-			if (*(string + i) == '\n' || *(string + i) == ';')
-			{
-				*(string + i + 1) = '\0';
-				break;
-			}
+		if (*(string + i) == '\n' || *(string + i) == ';')
+		{
+			*(string + i + 1) = '\0';
+			break;
+		}
 		i++;
 	}
 	*input = string;
