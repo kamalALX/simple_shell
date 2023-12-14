@@ -19,16 +19,16 @@ Through "The Gates of Shell," students gain practical experience in coding with 
 
 	- Providing error messages and prompting again if an executable cannot be found.
 
-	- Robust error handling.
+	- R obust error handling.
 
 	- Handling the "end of file" condition (Ctrl+D).
 
 	- Managing command lines with arguments.
 
 	- Handling the PATH environment variable.
-
-	- Supporting the exit command and capturing exit statuses.
-
+           
+	- Supporting the exit command and capturing exit statuses.                       
+                                                                                                                        
 	- Preventing the termination of the shell upon pressing Ctrl-C.
 
 	- Handling the command separator (;).
