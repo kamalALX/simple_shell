@@ -1,8 +1,5 @@
 #include "main.h"
 
-int status = 0;
-char *string;
-char *input = NULL;
 /**
  * exit_comand - Checks if the given input_tokens represent the exit command.
  * @input_tokens: An array of strings representing the command and its arguments.

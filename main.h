@@ -13,6 +13,7 @@ extern int status;
 extern char *line;
 extern char *result;
 extern char **environ;
+extern char *input;
 
 #define MAX_TOKENS 50
 #define MAX_PATH_LENGTH 256
