@@ -3,7 +3,13 @@
 int status = 0;
 char *string;
 char *input = NULL;
-
+/**
+ * main - Simple shell program that reads input from the user.
+ * @argc: The number of command-line arguments.
+ * @argv: An array containing the command-line arguments.
+ * @env: The environment variables.
+ * Return: The exit status of the shell program.
+*/
 int main(int argc __attribute__((unused)), char *argv[], char **env)
 {
 	int token_count;
@@ -60,7 +66,11 @@ int main(int argc __attribute__((unused)), char *argv[], char **env)
 	free(input);
 	return (status);
 }
-
+/**
+ * _getline - Reads a line from standard input and stores it in a dynamically
+ * @input: A pointer to a char pointer where the input line will be stored.
+ * Return: 0 on success, -1 on failure or end-of-file.
+*/
 int _getline(char **input)
 {
 	ssize_t r;
@@ -89,7 +99,10 @@ int _getline(char **input)
 	*input = string;
 	return (0);
 }
-
+/**
+ * print_env2 - Prints the environment variables to standard output.
+ * @env: An array of strings representing the environment variables.
+*/
 void print_env2(char **env)
 {
 	int i = 0;
@@ -101,7 +114,11 @@ void print_env2(char **env)
 		i++;
 	}
 }
-
+/**
+ * print_env - Checks if the given string represents the "env" command.
+ * @string: The input string to be checked.
+ * Return: 1 if the string represents the "env" command, 0 otherwise.
+ */
 int print_env(const char *string)
 {
 	const char ar[] = "env";
@@ -126,7 +143,12 @@ int print_env(const char *string)
 	}
 	return (0);
 }
-
+/**
+ * exit_comand - Checks if the given input_tokens represent the exit command.
+ * @input_tokens: An array of strings representing the command and its arguments.
+ * @shell_name: The name of the shell program.
+ * Return: 0.
+ */
 int exit_comand(char **input_tokens, char *shell_name)
 {
 	const char ar[] = "exit";
@@ -138,7 +160,7 @@ int exit_comand(char **input_tokens, char *shell_name)
 		if (string[i] == ar[0])
 		{
 			j = 0;
-			while (ar[j] != '\0' && string[i] == ar[j])
+		while (ar[j] != '\0' && string[i] == ar[j])
 			{
 				i++;
 				j++;
@@ -152,7 +174,7 @@ int exit_comand(char **input_tokens, char *shell_name)
 				else if (i == 2)
 				{
 					arg = _atoi(input_tokens[1]);
-					if (arg <= 0)
+					if (arg < 0)
 					{
 						write(2, shell_name, _strlen(shell_name));
 						write(2, ": 1: exit: Illegal number: ", 27);
@@ -178,142 +200,4 @@ int exit_comand(char **input_tokens, char *shell_name)
 		i++;
 	}
 	return (0);
-}
-
-int isFullPath(const char *string)
-{
-	const char ar[] = "/";
-	int i = 0, j = 0;
-
-	while (string[i] != '\0') {
-		if (string[i] == ar[0]) {
-			j = 0;
-			while (ar[j] != '\0' && string[i] == ar[j]) {
-				i++;
-				j++;
-			}
-			if (ar[j] == '\0') {
-				return (1);
-			}
-		}
-		i++;
-	}
-	return (0);
-}
-char *stenvp(char *envp[])
-{
-	char *path;
-	const char ar[] = "PATH";
-	int i = 0, j = 0, d;
-
-	while (envp[i] != NULL)
-	{
-		if (envp[i][0] == ar[0])
-		{
-			j = 0;
-			while (ar[j] != '\0' && envp[i][j] == ar[j])
-			{
-				j++;
-			}
-			d = 5;
-			if (ar[j] == '\0')
-			{
-				j = 0;
-				path = malloc(_strlen(envp[i]) - d + 1);
-				if (path == NULL)
-					exit(EXIT_FAILURE);
-				while (envp[i][d] != '\0')
-				{
-					path[j] = envp[i][d];
-					d++;
-					j++;
-				}
-				path[j] = '\0';
-				return (path);
-			}
-		}
-		i++;
-	}
-	return (NULL);
-}
-
-void execfullpath(char *path, char *input_tokens[], char *shell_name)
-{
-	pid_t pid;
-	char *token;
-	char *full_path;
-	int found = 0;
-	char *half_path;
-	
-	token = strtok(path, ":");
-	while (token != NULL)
-	{
-		half_path = _strcat(token, "/");
-		full_path = _strcat(half_path, input_tokens[0]);
-		if (full_path == NULL)
-		{
-			found = 1;
-			break;
-		}
-		if (access(full_path, X_OK) == 0)
-		{
-			free(half_path);
-			pid = fork();
-			if (pid == 0)
-			{
-				execve(full_path, input_tokens, NULL);
-			}
-			else
-			{
-				waitpid(pid, &status, 0);
-				free(full_path);
-				status >>= 8;
-				found = 1;
-				break;
-			}
-		}
-		free(half_path);
-		free(full_path);
-		token = strtok(NULL, ":");
-	}
-	if (!found)
-	{
-		write(2, shell_name, _strlen(shell_name));
-		write(2, ": 1: ", 5);
-		write(2, input_tokens[0], _strlen(input_tokens[0]));
-		write(2, ": not found\n", 12);
-		status = 127;
-	}
-
-}
-
-void one_word_command(char *input_tokens[], char *shell_name)
-{
-	pid_t pid;
-
-	if (access(input_tokens[0], X_OK) == 0)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			if (execve(input_tokens[0], input_tokens, NULL) == -1)
-			{
-				perror(_custom_getenv("PWD"));
-				exit(2);
-			}
-		}
-		else
-		{
-			waitpid(pid, &status, 0);
-			status >>= 8;
-		}
-	}
-	else
-	{
-		write(2, shell_name, _strlen(shell_name));
-		write(2, ": 1: ", 5);
-		write(2, input_tokens[0], _strlen(input_tokens[0]));
-		write(2, ": not found\n", 12);
-		status = 127;
-	}
 }
